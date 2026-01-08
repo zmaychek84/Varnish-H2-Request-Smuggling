@@ -1,0 +1,91 @@
+{
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Glog.AI",
+          "organization": "Glog.AI",
+          "fullName": "Glog, Making software more secure",
+          "version": "1.0.0",
+          "semanticVersion": "1.0.0",
+          "informationUri": "https://www.glog.ai",
+          "rules": [
+            {
+              "id": "733a8dfd-8100-316d-8ff9-b750c45ab1e3",
+              "name": "High-Risk Dockerfile Vulnerability: Lack of Non-Root User Specification",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nIn Docker, the \"High-Risk Dockerfile Vulnerability: Lack of Non-Root User Specification\" vulnerability refers to the situation where a Dockerfile does not specify a non-root user for running the container. By default, Docker containers run as root, which means that if an attacker manages to break out of the container, they would have root access to the host system. This is a significant security concern.\n\n## Security Concern\n\nThe security concern here is that if an attacker manages to exploit a vulnerability within the application running inside the Docker container, they could potentially gain root access to the host system. This would give them the ability to execute arbitrary commands, modify system files, and generally cause havoc.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to always specify a non-root user in your Dockerfile. This can be done using the `USER` directive. By running the container as a non-root user, you can limit the potential damage an attacker could do if they manage to break out of the container.\n\n## Source Code Fix Recommendation\n\nHere is how you could modify the provided Dockerfile to specify a non-root user:\n\n```Dockerfile\nFROM debian:stretch\n\n# Create a new user and group 'appuser'\nRUN groupadd -r appuser && useradd -r -g appuser appuser\n\n# Switch to 'appuser'\nUSER appuser\n```\n\nIn this example, a new user and group 'appuser' is created, and then the `USER` directive is used to switch to this user.\n\n## References\n\n- [CWE-250: Execution with Unnecessary Privileges](https://cwe.mitre.org/data/definitions/250.html)\n\nPlease note that the links provided are active and accessible to anonymous users at the time of writing this report."
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-250",
+                    "url": "https://cwe.mitre.org/data/definitions/250.html"
+                  }
+                ],
+                "severity": "HIGH",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-250"
+                ]
+              }
+            }
+          ],
+          "language": "en-US",
+          "contents": [
+            "localizedData",
+            "nonLocalizedData"
+          ],
+          "isComprehensive": false
+        }
+      },
+      "language": "en-US",
+      "results": [
+        {
+          "ruleId": "733a8dfd-8100-316d-8ff9-b750c45ab1e3",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "High-Risk Dockerfile Vulnerability: Lack of Non-Root User Specification"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "ncat/Dockerfile",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1,
+                  "snippet": {
+                    "text": "FROM debian:stretch"
+                  }
+                }
+              },
+              "message": {
+                "text": "ncat/Dockerfile"
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "cd96b3f72e09fff62e74c67a6cdfef48c38d18d99fc88761f702015571c0a71a",
+            "glog-pfp-ruleFileCode/v1": "3d9cec200ad95e742a659dd7fa890221733765f1d64bbf7f00249caa397a3b88"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "3d9cec200ad95e742a659dd7fa890221733765f1d64bbf7f00249caa397a3b88"
+          }
+        }
+      ],
+      "newlineSequences": [
+        "\r\n",
+        "\n"
+      ]
+    }
+  ]
+}
